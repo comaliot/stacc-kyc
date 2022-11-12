@@ -9,6 +9,39 @@
   font-size: 16px;
 }
 
+.button {
+  height: 48px;
+  width: 92px;
+  margin-left: 5px;
+  border: none;
+  background-color: #fbc02d;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #e0aa23;
+}
+
+.searchDropdown {
+  margin-top: 5px;
+  width: 390px;
+  -webkit-box-shadow: 0px 4px 20px 0px rgba(57, 99, 150, 0.15);
+  -moz-box-shadow: 0px 4px 20px 0px rgba(57, 99, 150, 0.15);
+  box-shadow: 0px 4px 20px 0px rgba(57, 99, 150, 0.15);
+}
+
+.dropdownRow {
+  background-color: #fff;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.dropdownRow:hover {
+  background-color: #eaeaea;
+}
+
 @media screen and (max-width: 600px) {
   .inputField {
     width: 60%;
