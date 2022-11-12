@@ -1,0 +1,22 @@
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  max-height: 340px;
+  max-width: 620px;
+  background-color: #396396;
+  padding: 80px 30px;
+}
+
+.illustration {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .illustration {
+    display: none;
+  }
+}

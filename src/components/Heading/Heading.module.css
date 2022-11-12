@@ -1,4 +1,6 @@
 .heading {
   font-size: 32px;
-  color: rgb(241, 105, 105);
+  line-height: 1.5;
+  font-weight: 500;
+  color: #fff;
 }

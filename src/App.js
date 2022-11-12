@@ -1,11 +1,11 @@
-import Heading from './components/Heading/Heading';
+import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 
 function App() {
   return (
     <div className="App">
       <Nav />
-      <Heading title="Politically Exposed Person (PEP) sanctions check and screening" />
+      <Header />
     </div>
   );
 }
