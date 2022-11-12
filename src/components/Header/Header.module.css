@@ -15,8 +15,9 @@
   width: 100%;
 }
 
-@media screen and (max-width: 600px) {
-  .illustration {
-    display: none;
+@media screen and (max-width: 992px) {
+  .headerWrapper {
+    display: flex;
+    flex-direction: column;
   }
 }
