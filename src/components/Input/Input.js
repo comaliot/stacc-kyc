@@ -11,6 +11,7 @@ export default function Input() {
     setValue(event.target.value);
   };
 
+  // function accepts 'searchTerm' parameter and sets input value to 'searchTerm' and removes the rest of the search results
   const onSearch = searchTerm => {
     setValue(searchTerm);
     console.log('search', searchTerm);
@@ -34,13 +35,14 @@ export default function Input() {
       <div className={styles.searchDropdown}>
         {data
           .filter(person => {
+            // sets 'searchTerm' value and 'personName' from the data to lower case for easier comparison/filtering
             const searchTerm = value.toLowerCase();
             const personName = person.name.toLowerCase();
 
             return (
               searchTerm &&
               personName.startsWith(searchTerm) &&
-              personName !== searchTerm
+              personName !== searchTerm // removes search result dropdown
             );
           })
           .map(person => (
