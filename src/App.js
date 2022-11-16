@@ -1,11 +1,12 @@
-import Header from './components/Header/Header';
-import Nav from './components/Nav/Nav';
+import { Routes, Route } from 'react-router-dom';
+import Home from './components/Home/Home';
 
 function App() {
   return (
     <div className="App">
-      <Nav />
-      <Header />
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+      </Routes>
     </div>
   );
 }

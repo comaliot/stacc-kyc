@@ -34,10 +34,14 @@
 }
 
 .dropdownRow {
-  color: #396396;
   background-color: #fff;
   padding: 20px;
   cursor: pointer;
+}
+
+.dropdownRow a {
+  text-decoration: none;
+  color: #396396;
 }
 
 .dropdownRow:hover {

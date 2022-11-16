@@ -1,59 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import useDebounce from '../../hooks/useDebounce';
+import SearchResults from '../SearchResults/SearchResults';
 import styles from './Input.module.css';
 
-const data = require('../../data/pep_small.json');
-
 export default function Input() {
-  const [value, setValue] = useState('');
+  const [persons, setPersons] = useState(); //storing all the persons we get from an API
+  const [search, setSearch] = useState(); // holds our search string
+  const [loading, setLoading] = useState(); // waiting for request to come back with the results
 
-  const onChange = event => {
-    // gets the value from the input field and put inside the state
-    setValue(event.target.value);
-  };
+  const debouncedSearch = useDebounce(search, 500);
 
-  // function accepts 'searchTerm' parameter and sets input value to 'searchTerm' and removes the rest of the search results
-  const onSearch = searchTerm => {
-    setValue(searchTerm);
-    console.log('search', searchTerm);
-  };
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
 
+      setPersons([]);
+
+      const data = await fetch(
+        `https://code-challenge.stacc.dev/api/pep?name=${debouncedSearch}`
+      ).then(res => res.json());
+
+      setPersons(data.hits);
+      setLoading(false);
+    }
+
+    if (debouncedSearch) fetchData(); // if debouncedSearch is defined, then fetchData()
+  }, [debouncedSearch]); // [search] dependency means when the search changes, call useEffect hook
+
+  function handleSetSearch(e) {
+    setSearch(e.target.value);
+  }
   return (
     <>
-      <input
-        className={styles.inputField}
-        type="name"
-        name="name"
-        placeholder="f.eks Thomas"
-        value={value}
-        onChange={onChange}
-      />
+      <div>
+        <input
+          className={styles.inputField}
+          type="search"
+          name="name"
+          placeholder="f.eks Thomas"
+          onChange={handleSetSearch}
+        />
 
-      <button onClick={() => onSearch(value)} className={styles.button}>
-        Search
-      </button>
+        <button className={styles.button}>Search</button>
+      </div>
 
-      <div className={styles.searchDropdown}>
-        {data
-          .filter(person => {
-            // sets 'searchTerm' value and 'personName' from the data to lower case for easier comparison/filtering
-            const searchTerm = value.toLowerCase();
-            const personName = person.name.toLowerCase();
+      {loading && <p>Loading...</p>}
 
+      <div>
+        {persons &&
+          persons.map(person => {
             return (
-              searchTerm &&
-              personName.startsWith(searchTerm) &&
-              personName !== searchTerm // removes search result dropdown
+              <div key={person.id}>
+                <SearchResults name={person.name} />
+              </div>
             );
-          })
-          .map(person => (
-            <div
-              onClick={() => onSearch(person.name)}
-              key={person.id}
-              className={styles.dropdownRow}
-            >
-              {person.name}
-            </div>
-          ))}
+          })}
       </div>
     </>
   );
